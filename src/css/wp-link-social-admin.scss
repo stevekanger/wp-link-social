@@ -1,0 +1,44 @@
+@import "./font-awesome.scss";
+
+$color-white: #ffffff;
+$color-blue: #2271b1;
+$color-blue-darken: #0d4269;
+
+#wp-link-social-current {
+  >div {
+    background: $color-blue;
+    color: $color-white;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    border-radius: 0.25rem;
+    margin: 0.25rem 0;
+
+    >a,
+    >div {
+      padding: 1rem;
+    }
+
+    >a {
+      color: $color-white;
+      text-decoration: none;
+    }
+
+    >div:first-of-type {
+      border-right: 1px solid $color-blue-darken;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.6rem;
+    }
+
+    >button {
+      margin: 0 1rem 0 auto;
+      border: 1px solid $color-blue-darken;
+      background: $color-blue;
+      border-radius: 0.25rem;
+      color: $color-white;
+      cursor: pointer;
+    }
+  }
+}

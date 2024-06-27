@@ -1,0 +1,154 @@
+/*!
+ * Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ * Copyright 2024 Fonticons, Inc.
+ */
+:root,
+:host {
+  --fa-style-family-brands: "Font Awesome 6 Brands";
+  --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src:
+    url("@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2") format("woff2"),
+    url("@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf") format("truetype");
+}
+
+.fab,
+.fa-brands {
+  font-weight: 400;
+  font-family: var(--fa-style-family-brands, "Font Awesome 6 Brands");
+}
+
+.fa-amazon:before {
+  content: "\f270";
+}
+
+.fa-behance:before {
+  content: "\f1b4";
+}
+
+.fa-bluesky:before {
+  content: "\e671";
+}
+
+.fa-deviantart:before {
+  content: "\f1bd";
+}
+
+.fa-diaspora:before {
+  content: "\f791";
+}
+
+.fa-digg:before {
+  content: "\f1a6";
+}
+
+.fa-dribbble:before {
+  content: "\f17d";
+}
+
+.fa-etsy:before {
+  content: "\f2d7";
+}
+
+.fa-facebook:before {
+  content: "\f09a";
+}
+
+.fa-flickr:before {
+  content: "\f16e";
+}
+
+.fa-github:before {
+  content: "\f09b";
+}
+
+.fa-instagram:before {
+  content: "\f16d";
+}
+
+.fa-lastfm:before {
+  content: "\f202";
+}
+
+.fa-linkedin:before {
+  content: "\f08c";
+}
+
+.fa-mastodon:before {
+  content: "\f4f6";
+}
+
+.fa-medium:before {
+  content: "\f23a";
+}
+
+.fa-periscope:before {
+  content: "\f3da";
+}
+
+.fa-pinterest:before {
+  content: "\f0d2";
+}
+
+.fa-reddit:before {
+  content: "\f1a1";
+}
+
+.fa-snapchat:before {
+  content: "\f2ab";
+}
+
+.fa-soundcloud:before {
+  content: "\f1be";
+}
+
+.fa-spotify:before {
+  content: "\f1bc";
+}
+
+.fa-stack-overflow:before {
+  content: "\f16c";
+}
+
+.fa-telegram:before {
+  content: "\f2c6";
+}
+
+.fa-threads:before {
+  content: "\e618";
+}
+
+.fa-tiktok:before {
+  content: "\e07b";
+}
+
+.fa-tumblr:before {
+  content: "\f173";
+}
+
+.fa-vimeo:before {
+  content: "\f40a";
+}
+
+.fa-vine:before {
+  content: "\f1ca";
+}
+
+.fa-x-twitter:before {
+  content: "\e61b";
+}
+
+.fa-xing:before {
+  content: "\f168";
+}
+
+.fa-youtube:before {
+  content: "\f167";
+}
