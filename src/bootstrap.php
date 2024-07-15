@@ -2,6 +2,7 @@
 
 namespace WPLinkSocial;
 
+use WPLinkSocial\lib\Functions;
 use WPLinkSocial\lib\Admin;
 use WPLinkSocial\lib\Api;
 use WPLinkSocial\lib\Plugin;
@@ -12,6 +13,7 @@ defined('ABSPATH') || exit;
 require_once __DIR__ . '/lib/Admin.php';
 require_once __DIR__ . '/lib/Api.php';
 require_once __DIR__ . '/lib/Data.php';
+require_once __DIR__ . '/lib/Functions.php';
 require_once __DIR__ . '/lib/Plugin.php';
 require_once __DIR__ . '/lib/Template.php';
 require_once __DIR__ . '/lib/Utils.php';
@@ -19,5 +21,6 @@ require_once __DIR__ . '/lib/Widgets.php';
 
 Admin::init();
 Api::init();
+Functions::init();
 Plugin::init();
 Widgets::init();

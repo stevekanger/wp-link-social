@@ -25,18 +25,21 @@ class Widget_Links extends \WP_Widget {
             'description' => __('Display your social links.', 'wp-link-social'),
         ];
 
-        parent::__construct($id, __('WP Link Social Links', 'wp-link-social'), $options);
+        parent::__construct($id, __('WP Link Social Show Links', 'wp-link-social'), $options);
     }
 
     public function widget($args, $instance) {
         echo $args['before_widget'];
-        Plugin::show_links();
+        Functions::show_links();
         echo $args['after_widget'];
     }
 
-    public function form($instance) {
+    public function update($new_instance, $old_instance) {
+        return $new_instance;
     }
 
-    public function update($new_instance, $old_instance) {
+    public function form($instance) {
+        echo '<p class="no-options-widget">' . __('There are no options for this widget.') . '</p>';
+        return 'noform';
     }
 }

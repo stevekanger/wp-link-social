@@ -17,7 +17,7 @@ class Admin {
     public static function enqueue_scripts($hook) {
         if ($hook === 'toplevel_page_' . PLUGIN_PREFIX) {
             wp_enqueue_style('wp-link-social-admin', plugin_dir_url(PLUGIN_ROOT_FILE) . 'dist/wp-link-social-admin.css', false, '0.0.1', 'all');
-            wp_enqueue_script('wp-link-social-admin', plugin_dir_url(PLUGIN_ROOT_FILE) . 'dist/wp-link-social-admin.js', ["jquery", "jquery-ui-sortable", "react"], '0.0.1', true);
+            wp_enqueue_script('wp-link-social-admin', plugin_dir_url(PLUGIN_ROOT_FILE) . 'dist/wp-link-social-admin.js', ["jquery", "jquery-ui-sortable"], '0.0.1', true);
 
             wp_localize_script(
                 'wp-link-social-admin',

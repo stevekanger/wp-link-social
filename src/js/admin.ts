@@ -1,157 +1,166 @@
-import '../css/wp-link-social-admin.scss'
+import "../css/wp-link-social-admin.scss";
 
 type LinkNode = {
-  title: string
-  icon: string
-  key: string
-  url: string
-}
+  title: string;
+  icon: string;
+  key: string;
+  url: string;
+};
 
 type SupportedNetwork = {
-  key: string
-  title: string
-  icon: string
-}
+  key: string;
+  title: string;
+  icon: string;
+};
 
 declare const wpData: {
-  nonce: string
-  supportedNetworks: Record<string, SupportedNetwork>
-  links: LinkNode[]
-}
+  nonce: string;
+  supportedNetworks: Record<string, SupportedNetwork>;
+  links: LinkNode[];
+};
 
-const { nonce, supportedNetworks } = wpData
-let { links } = wpData
+const { nonce, supportedNetworks } = wpData;
+let { links } = wpData;
 
-const $ = jQuery
-const apiUrl = '/wp-json/wp-link-social/v1/social-links'
-const htmlList = $('#wp-link-social-current')
+const $ = jQuery;
+const apiUrl = "/wp-json/wp-link-social/v1/social-links";
+const htmlList = $("#wp-link-social-current");
+const keyInput = $("#wp-link-social-network");
+const urlInput = $("#wp-link-social-url");
 
 function refreshSortUl() {
-  htmlList.sortable('refresh')
+  htmlList.sortable("refresh");
 }
 
 function getLinksFromList() {
-  const arr: LinkNode[] = []
+  const arr: LinkNode[] = [];
 
-  $('#wp-link-social-current > div').each((index, element) => {
-    const key = element.dataset.key
-    const url = element.dataset.url
+  $("#wp-link-social-current > div").each((index, element) => {
+    const key = element.dataset.key;
+    const url = element.dataset.url;
     if (!key || !url) {
-      return
+      return;
     }
     arr.push({
       ...supportedNetworks[key],
       url,
-    })
-  })
+    });
+  });
 
-  return arr
+  return arr;
 }
 
 function updateHTML() {
-  htmlList.empty()
+  htmlList.empty();
 
   if (links.length === 0) {
-    htmlList.append('<p>There are currently no links.</p>')
-    refreshSortUl()
-    return
+    htmlList.append("<p>There are currently no links.</p>");
+    refreshSortUl();
+    return;
   }
 
   links.forEach((link) => {
-    const div = document.createElement('div')
-    div.dataset.key = link.key
-    div.dataset.url = link.url
+    const div = document.createElement("div");
+    div.dataset.key = link.key;
+    div.dataset.url = link.url;
 
-    const iconDiv = document.createElement('div')
-    const icon = document.createElement('span')
-    $(icon).addClass(supportedNetworks[link.key].icon)
-    iconDiv.append(icon)
+    const iconDiv = document.createElement("div");
+    const icon = document.createElement("span");
+    $(icon).addClass(supportedNetworks[link.key].icon);
+    iconDiv.append(icon);
 
-    const button = document.createElement('button')
-    const buttonIcon = document.createElement('span')
-    $(buttonIcon).addClass('dashicons dashicons-no')
-    button.append(buttonIcon)
+    const button = document.createElement("button");
+    const buttonIcon = document.createElement("span");
+    $(buttonIcon).addClass("dashicons dashicons-no");
+    button.append(buttonIcon);
 
-    const content = document.createElement('a')
-    $(content).attr('href', link.url)
-    $(content).attr('target', '_blank')
-    $(content).text(link.url)
+    const content = document.createElement("a");
+    $(content).attr("href", link.url);
+    $(content).attr("target", "_blank");
+    $(content).text(link.url);
 
-    div.append(iconDiv)
-    div.append(content)
-    div.append(button)
-    htmlList.append(div)
-  })
-  refreshSortUl()
+    div.append(iconDiv);
+    div.append(content);
+    div.append(button);
+    htmlList.append(div);
+  });
+  refreshSortUl();
+}
+
+function clearFields() {
+  keyInput.val("");
+  urlInput.val("");
 }
 
 async function updateLinks() {
   try {
-    const method = 'POST'
+    const method = "POST";
     const response = await fetch(apiUrl, {
       method,
       body: JSON.stringify({ links }),
       headers: {
-        'Content-Type': 'application/json',
-        'X-WP-Nonce': nonce,
+        "Content-Type": "application/json",
+        "X-WP-Nonce": nonce,
       },
-    })
+    });
 
     if (!response.ok) {
       throw new Error(
-        `Request to ${apiUrl} failed with status ${response.status} ${response.status}`
-      )
+        `Request to ${apiUrl} failed with status ${response.status} ${response.status}`,
+      );
     }
   } catch (error: any) {
-    throw error
+    throw error;
   }
 }
 
 function handleAddLink() {
-  const key = $('#wp-link-social-network').val() as string
-  const url = $('#wp-link-social-url').val() as string
+  const key = keyInput.val() as string;
+  const url = urlInput.val() as string;
 
   if (!key || !url) {
-    alert('Please enter a network and url')
-    return
+    alert("Please enter a network and url");
+    return;
   }
 
-  const existing = links.find((link) => link.key === key)
+  const existing = links.find((link) => link.key === key);
 
   if (existing) {
-    existing.url = url
-    updateLinks()
-    updateHTML()
-    return
+    existing.url = url;
+    updateLinks();
+    updateHTML();
+    clearFields();
+    return;
   }
 
   const newLink: LinkNode = {
     ...supportedNetworks[key],
     url,
-  }
+  };
 
-  links.push(newLink)
-  updateLinks()
-  updateHTML()
+  links.push(newLink);
+  updateLinks();
+  updateHTML();
+  clearFields();
 }
 
 function handleUpdatedSort() {
-  links = getLinksFromList()
-  updateLinks()
+  links = getLinksFromList();
+  updateLinks();
 }
 
 async function handleRemoveLink(e: JQuery.ClickEvent) {
-  const key = $(e.target).closest('div').data('key') as string
-  links = links.filter((link) => link.key !== key)
-  updateLinks()
-  updateHTML()
+  const key = $(e.target).closest("div").data("key") as string;
+  links = links.filter((link) => link.key !== key);
+  updateLinks();
+  updateHTML();
 }
 
-$(window).on('load', () => {
+$(window).on("load", () => {
   htmlList.sortable({
     update: handleUpdatedSort,
-  } as any)
+  } as any);
 
-  $('#wp-link-social-add').on('click', handleAddLink)
-  $('#wp-link-social-current').on('click', 'button', handleRemoveLink)
-})
+  $("#wp-link-social-add").on("click", handleAddLink);
+  $("#wp-link-social-current").on("click", "button", handleRemoveLink);
+});
