@@ -80,7 +80,7 @@ class Admin {
             PLUGIN_PREFIX . '_settings',
             [
                 'id' => PLUGIN_PREFIX . '_enqueue_font_awesome',
-                'template' => 'settings_checkbox',
+                'template' => 'ui/settings_checkbox',
                 'value' => get_option(PLUGIN_PREFIX . '_enqueue_font_awesome'),
                 'description' => __('Whether or not to include the font awesome css (font awesome brands) in your theme. Uncheck if you are already using it in your theme.', 'wp-link-social'),
             ]
@@ -88,11 +88,11 @@ class Admin {
     }
 
     public static function links_page_callback() {
-        Template::include('admin_links_page');
+        Template::include('pages/admin_links');
     }
 
     public static function settings_page_callback() {
-        Template::include('admin_settings_page');
+        Template::include('pages/admin_settings');
     }
 
     public static function settings_section_callback() {
